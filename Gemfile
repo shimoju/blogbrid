@@ -2,7 +2,7 @@ ruby '2.2.0'
 source 'https://rubygems.org'
 
 gem 'sinatra', require: 'sinatra/base'
-gem 'sinatra-contrib', require: false
+gem 'sinatra-contrib', require: 'sinatra/config_file'
 gem 'sinatra-asset-pipeline', require: 'sinatra/asset_pipeline'
 gem 'uglifier'
 
