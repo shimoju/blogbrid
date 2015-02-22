@@ -6,6 +6,8 @@ class Blogbrid < Sinatra::Base
   configure do
     register Sinatra::ConfigFile
     config_file 'config.yml'
+    set :theme_path, "themes/#{settings.theme}"
+    set :views, "#{settings.root}/#{settings.theme_path}/views"
   end
 
   configure :development do
@@ -14,6 +16,6 @@ class Blogbrid < Sinatra::Base
   end
 
   get '/' do
-    "Hello #{settings.title}!"
+    slim :index
   end
 end
