@@ -1,0 +1,11 @@
+.DS_Store
+/.bundle
+/vendor/bundle
+/log
+/tmp
+/spec/tmp
+/coverage
+.sass-cache
+
+/build
+.env*
