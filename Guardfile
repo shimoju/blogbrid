@@ -32,6 +32,7 @@ guard 'livereload' do
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html|png|jpg))).*}) { |m| "/assets/#{m[3]}" }
 
   watch('app.rb')
+  watch(%r{content/.+\.md})
   watch(%r{themes/.+/views/.+\.(erb|haml|slim)$})
   watch(%r{themes/.+/assets/\w+/(.+\.(css|js|html|png|jpg)).*}) { |m| "/assets/#{m[1]}" }
 end
