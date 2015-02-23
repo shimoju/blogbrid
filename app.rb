@@ -1,6 +1,7 @@
 ENV['RACK_ENV'] ||= 'development'
 require 'bundler/setup'
 Bundler.require(:default, ENV['RACK_ENV'])
+require_relative 'lib/content'
 
 class Blogbrid < Sinatra::Base
   configure do
@@ -29,5 +30,11 @@ class Blogbrid < Sinatra::Base
 
   get '/' do
     slim :index
+  end
+
+  get '/*/' do
+    path = "#{settings.content_path}/#{params[:splat][0]}.md"
+    pass unless File.exist?(path)
+    slim :content, locals: { content: Content.new(path) }
   end
 end
