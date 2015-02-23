@@ -4,5 +4,9 @@ html lang="en"
     meta charset="utf-8"
     title= settings.title
     meta name="viewport" content="width=device-width, initial-scale=1"
+    == stylesheet_tag 'app'
   body
     == yield
+
+    / JavaScript
+    == javascript_tag 'app'
