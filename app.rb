@@ -13,6 +13,7 @@ class Blogbrid < Sinatra::Base
   configure :development do
     require 'sinatra/reloader'
     register Sinatra::Reloader
+    set :slim, pretty: true, sort_attrs: false
   end
 
   get '/' do
