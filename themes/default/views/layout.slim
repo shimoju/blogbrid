@@ -2,10 +2,14 @@ doctype html
 html lang="en"
   head
     meta charset="utf-8"
-    title= settings.title
+    title
+      = content.title + ' - ' if defined?(content)
+      = settings.title
     meta name="viewport" content="width=device-width, initial-scale=1"
     == stylesheet_tag 'app'
   body
+    h1= settings.title
+
     == yield
 
     / JavaScript
