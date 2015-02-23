@@ -11,6 +11,10 @@ gem 'puma', require: false
 
 gem 'slim'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-normalize.css'
+end
+
 group :test do
   gem 'capybara'
   gem 'poltergeist'

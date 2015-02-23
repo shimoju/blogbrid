@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     backports (3.6.4)
     capybara (2.4.4)
@@ -85,6 +86,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails-assets-normalize.css (3.0.2)
     rake (10.4.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
@@ -167,6 +169,7 @@ DEPENDENCIES
   puma
   rack-livereload
   rack-test
+  rails-assets-normalize.css!
   rspec
   sinatra
   sinatra-asset-pipeline
