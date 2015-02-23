@@ -102,5 +102,6 @@ guard :rspec, cmd: "bundle exec rspec" do
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 
+  watch("#{rspec.spec_dir}/sinatra_helper.rb") { rspec.spec_dir }
   dsl.watch_spec_files_for(%r{^(app)\.rb$})
 end
