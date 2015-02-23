@@ -7,6 +7,7 @@ class Blogbrid < Sinatra::Base
     register Sinatra::ConfigFile
     config_file 'config.yml'
     set :theme_path, "themes/#{settings.theme}"
+    set :content_path, "#{settings.root}/content"
     set :views, "#{settings.root}/#{settings.theme_path}/views"
 
     set :assets_prefix, %W(assets vendor/assets #{settings.theme_path}/assets)
