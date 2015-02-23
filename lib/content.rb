@@ -13,6 +13,14 @@ class Content
     content[:data]
   end
 
+  def name
+    @name ||= File.basename(@path, '.*')
+  end
+
+  def title
+    @title ||= defined?(data['title']) ? data['title'] : name
+  end
+
   private
 
   def content

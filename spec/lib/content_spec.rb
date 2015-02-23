@@ -58,4 +58,30 @@ RSpec.describe Content do
       end
     end
   end
+
+  describe '#name' do
+    let(:content) { Content.new(markdown) }
+
+    it 'ファイル名から拡張子を除いた文字列を返すこと' do
+      expect(content.name).to eq('markdown')
+    end
+  end
+
+  describe '#title' do
+    context 'Front Matterでタイトルが設定されていないとき' do
+      let(:content) { Content.new(empty_front_matter) }
+
+      it 'ファイル名から拡張子を除いた文字列を返すこと' do
+        expect(content.title).to eq('empty_front_matter')
+      end
+    end
+
+    context 'Front Matterでタイトルが設定されているとき' do
+      let(:content) { Content.new(front_matter) }
+
+      it '設定されたタイトルを返すこと' do
+        expect(content.title).to eq('Title')
+      end
+    end
+  end
 end
