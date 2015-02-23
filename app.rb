@@ -8,6 +8,15 @@ class Blogbrid < Sinatra::Base
     config_file 'config.yml'
     set :theme_path, "themes/#{settings.theme}"
     set :views, "#{settings.root}/#{settings.theme_path}/views"
+
+    set :assets_prefix, %W(assets vendor/assets #{settings.theme_path}/assets)
+    set :assets_css_compressor, :sass
+    set :assets_js_compressor, :uglifier
+    set :assets_digest, false if settings.development?
+    register Sinatra::AssetPipeline
+    if defined?(RailsAssets)
+      RailsAssets.load_paths.each { |path| settings.sprockets.append_path(path) }
+    end
   end
 
   configure :development do
