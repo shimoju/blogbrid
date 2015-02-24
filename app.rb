@@ -1,9 +1,10 @@
 ENV['RACK_ENV'] ||= 'development'
 require 'bundler/setup'
 Bundler.require(:default, ENV['RACK_ENV'])
-require_relative 'lib/blogbrid'
 
 class Blogbrid < Sinatra::Base
+  require_relative 'lib/blogbrid'
+
   configure do
     register Sinatra::ConfigFile
     config_file 'config.yml'
