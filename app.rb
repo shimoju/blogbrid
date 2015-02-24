@@ -2,6 +2,7 @@ ENV['RACK_ENV'] ||= 'development'
 require 'bundler/setup'
 Bundler.require(:default, ENV['RACK_ENV'])
 require_relative 'lib/content'
+require_relative 'lib/post'
 
 class Blogbrid < Sinatra::Base
   configure do
@@ -31,6 +32,13 @@ class Blogbrid < Sinatra::Base
 
   get '/' do
     slim :index
+  end
+
+  get '/:year/:month/:day/:name/' do
+    path = "#{settings.posts_path}/#{params[:year]}-#{params[:month]}-#{params[:day]}-#{params[:name]}.md"
+    pass unless File.exist?(path)
+    post = Post.new(path)
+    slim :post, locals: { content: post, post: post }
   end
 
   get '/*/' do |file|
