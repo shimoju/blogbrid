@@ -33,9 +33,9 @@ class Blogbrid < Sinatra::Base
     slim :index
   end
 
-  get '/*/' do
-    path = "#{settings.content_path}/#{params[:splat][0]}.md"
-    pass unless File.exist?(path)
+  get '/*/' do |file|
+    path = "#{settings.content_path}/#{file}.md"
+    pass if file.start_with?('_') || !File.exist?(path)
     slim :content, locals: { content: Content.new(path) }
   end
 end
