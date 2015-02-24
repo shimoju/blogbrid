@@ -1,4 +1,5 @@
 require 'yaml'
+require 'hashie'
 
 class Content
   def initialize(path)
@@ -18,7 +19,7 @@ class Content
   end
 
   def title
-    @title ||= defined?(data['title']) ? data['title'] : name
+    @title ||= data.title || name
   end
 
   private
@@ -30,7 +31,7 @@ class Content
   def parse_front_matter
     file = File.read(@path)
     if file =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-      {body: $POSTMATCH, data: YAML.load($1)}
+      {body: $POSTMATCH, data: Hashie::Mash.new(YAML.load($1))}
     else
       {body: file, data: nil}
     end

@@ -53,8 +53,8 @@ RSpec.describe Content do
     context '空のFront Matterがあるファイルのとき' do
       let(:content) { Content.new(empty_front_matter) }
 
-      it 'nilを返すこと' do
-        expect(content.data).to be_nil
+      it '空のオブジェクトを返すこと' do
+        expect(content.data).to be_empty
       end
     end
   end
