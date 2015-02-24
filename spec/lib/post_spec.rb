@@ -11,4 +11,12 @@ RSpec.describe Post do
       expect(post.name).to eq('post-sample')
     end
   end
+
+  describe '#date' do
+    let(:post) { Post.new(valid_post) }
+
+    it 'ファイル名の日付部分を読み取ってDateオブジェクトを返すこと' do
+      expect(post.date).to eq(Date.new(2015, 2, 24))
+    end
+  end
 end
