@@ -2,6 +2,7 @@ ENV['RACK_ENV'] ||= 'development'
 require 'bundler/setup'
 Bundler.require(:default, ENV['RACK_ENV'])
 require_relative 'lib/content'
+require_relative 'lib/post'
 
 class Blogbrid < Sinatra::Base
   configure do
@@ -9,6 +10,7 @@ class Blogbrid < Sinatra::Base
     config_file 'config.yml'
     set :theme_path, "themes/#{settings.theme}"
     set :content_path, "#{settings.root}/content"
+    set :posts_path, "#{settings.content_path}/_posts"
     set :views, "#{settings.root}/#{settings.theme_path}/views"
 
     set :assets_prefix, %W(assets vendor/assets #{settings.theme_path}/assets)
@@ -32,9 +34,16 @@ class Blogbrid < Sinatra::Base
     slim :index
   end
 
-  get '/*/' do
-    path = "#{settings.content_path}/#{params[:splat][0]}.md"
+  get '/:year/:month/:day/:name/' do
+    path = "#{settings.posts_path}/#{params[:year]}-#{params[:month]}-#{params[:day]}-#{params[:name]}.md"
     pass unless File.exist?(path)
+    post = Post.new(path)
+    slim :post, locals: { content: post, post: post }
+  end
+
+  get '/*/' do |file|
+    path = "#{settings.content_path}/#{file}.md"
+    pass if file.start_with?('_') || !File.exist?(path)
     slim :content, locals: { content: Content.new(path) }
   end
 end
