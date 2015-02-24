@@ -9,6 +9,8 @@ gem 'uglifier'
 gem 'foreman', require: false
 gem 'puma', require: false
 
+gem 'hashie'
+
 gem 'slim'
 gem 'redcarpet'
 
