@@ -173,6 +173,7 @@ DEPENDENCIES
   rack-livereload
   rack-test
   rails-assets-normalize.css!
+  rake
   redcarpet
   rspec
   sinatra

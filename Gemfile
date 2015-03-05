@@ -6,6 +6,7 @@ gem 'sinatra-contrib', require: 'sinatra/config_file'
 gem 'sinatra-asset-pipeline', require: 'sinatra/asset_pipeline'
 gem 'uglifier'
 
+gem 'rake'
 gem 'foreman', require: false
 gem 'puma', require: false
 
