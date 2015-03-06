@@ -18,6 +18,10 @@ class Blogbrid
       content[:data]
     end
 
+    def exist?
+      File.exist?(@file)
+    end
+
     def name
       @name ||= File.basename(@path, '.*')
     end

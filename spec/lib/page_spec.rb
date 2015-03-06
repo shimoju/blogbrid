@@ -64,6 +64,16 @@ RSpec.describe Blogbrid::Page do
     end
   end
 
+  describe '#exist?' do
+    let(:page) { Blogbrid::Page.new(markdown) }
+    let(:not_exist_page) { Blogbrid::Page.new('.not_exist.md') }
+
+    it 'ファイルが存在すればtrueを、しなければfalseを返すこと' do
+      expect(page.exist?).to be true
+      expect(not_exist_page.exist?).to be false
+    end
+  end
+
   describe '#name' do
     let(:page) { Blogbrid::Page.new(markdown) }
 
