@@ -2,9 +2,9 @@ require 'spec_helper'
 require 'page'
 
 RSpec.describe Blogbrid::Page do
-  let(:markdown) { 'spec/fixtures/markdown.md' }
-  let(:front_matter) { 'spec/fixtures/front_matter.md' }
-  let(:empty_front_matter) { 'spec/fixtures/empty_front_matter.md' }
+  let(:markdown) { 'spec/fixtures/content/pages/markdown.md' }
+  let(:front_matter) { 'spec/fixtures/content/pages/front_matter.md' }
+  let(:empty_front_matter) { 'spec/fixtures/content/pages/empty_front_matter.md' }
 
   describe '#body' do
     context 'Front Matterがないファイルのとき' do
