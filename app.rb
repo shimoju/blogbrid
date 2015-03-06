@@ -35,17 +35,17 @@ class Blogbrid < Sinatra::Base
     slim :index
   end
 
-  get '/:year/:month/:day/:name/' do
-    path = "#{settings.posts_path}/#{params[:year]}-#{params[:month]}-#{params[:day]}-#{params[:name]}.md"
-    pass unless File.exist?(path)
-    post = Post.new(path)
+  # Post
+  get '/*/' do |path|
+    post = Post.new(Post.url_to_filename(path))
+    pass unless post.exist?
     slim :post, locals: { content: post, post: post }
   end
 
-  get '/*/' do |file|
-    path = "#{settings.pages_path}/#{file}.md"
-    pass if file.start_with?('_') || !File.exist?(path)
-    page = Page.new(path)
+  # Page
+  get '/*/' do |path|
+    page = Page.new(Page.url_to_filename(path))
+    pass unless page.exist?
     slim :page, locals: { content: page, page: page }
   end
 end
