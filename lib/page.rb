@@ -3,8 +3,11 @@ require 'hashie'
 
 class Blogbrid
   class Page
-    def initialize(path)
+    @base_path = 'content/pages'
+
+    def initialize(path, base_path = self.class.base_path)
       @path = path
+      @file = File.expand_path(path, base_path)
     end
 
     def body
@@ -23,6 +26,14 @@ class Blogbrid
       @title ||= data.title || name
     end
 
+    def self.base_path
+      @base_path
+    end
+
+    def self.base_path=(path)
+      @base_path = path
+    end
+
     private
 
     def content
@@ -30,7 +41,7 @@ class Blogbrid
     end
 
     def parse_front_matter
-      file = File.read(@path)
+      file = File.read(@file)
       if file =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
         {body: $POSTMATCH, data: Hashie::Mash.new(YAML.load($1))}
       else

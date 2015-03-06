@@ -2,6 +2,8 @@ require_relative 'page'
 
 class Blogbrid
   class Post < Page
+    @base_path = 'content/posts'
+
     def date
       @date ||= Date.new(*split_filename[0, 3].map(&:to_i))
     end
