@@ -10,7 +10,8 @@ class Blogbrid < Sinatra::Base
     config_file 'config.yml'
     set :theme_path, "themes/#{settings.theme}"
     set :content_path, "#{settings.root}/content"
-    set :posts_path, "#{settings.content_path}/_posts"
+    set :pages_path, "#{settings.content_path}/pages"
+    set :posts_path, "#{settings.content_path}/posts"
     set :views, "#{settings.root}/#{settings.theme_path}/views"
 
     set :assets_prefix, %W(assets vendor/assets #{settings.theme_path}/assets)
@@ -42,8 +43,8 @@ class Blogbrid < Sinatra::Base
   end
 
   get '/*/' do |file|
-    path = "#{settings.content_path}/#{file}.md"
+    path = "#{settings.pages_path}/#{file}.md"
     pass if file.start_with?('_') || !File.exist?(path)
-    slim :content, locals: { content: Content.new(path) }
+    slim :page, locals: { content: Content.new(path) }
   end
 end
