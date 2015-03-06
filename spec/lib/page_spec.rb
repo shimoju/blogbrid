@@ -90,6 +90,25 @@ RSpec.describe Blogbrid::Page do
     end
   end
 
+  describe '#url' do
+    let(:page) { Blogbrid::Page.new(markdown) }
+
+    it 'ファイル名からURLに変換すること' do
+      expect(page.url).to eq('/markdown/')
+    end
+  end
+
+  describe '.url_to_filename' do
+    let(:url) { '/markdown/' }
+    let(:url_without_slash) { 'markdown' }
+
+    it '渡されたURLをファイル名に変換すること' do
+      converted_filename = Blogbrid::Page.url_to_filename(url)
+      expect(converted_filename).to eq('markdown.md')
+      expect(Blogbrid::Page.url_to_filename(url_without_slash)).to eq(converted_filename)
+    end
+  end
+
   describe '.base_path' do
     after(:example) do
       Blogbrid::Page.base_path = @base_path

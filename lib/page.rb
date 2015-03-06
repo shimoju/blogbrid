@@ -26,6 +26,16 @@ class Blogbrid
       @title ||= data.title || name
     end
 
+    def url
+      @url ||= "/#{@path.sub(/\.md$/, '')}/"
+    end
+
+    def self.url_to_filename(url)
+      # '/path/to/name/' => 'path/to/name.md'
+      path = url.sub(%r{^/}, '').sub(%r{/$}, '')
+      "#{path}.md"
+    end
+
     def self.base_path
       @base_path
     end

@@ -12,6 +12,16 @@ class Blogbrid
       @name ||= split_filename[3]
     end
 
+    def url
+      date.strftime("/%Y/%m/%d/#{name}/")
+    end
+
+    def self.url_to_filename(url)
+      # '/2015/02/24/hello-world/' => '2015-02-24-hello-world.md'
+      year, month, day, name = url.split('/').compact.reject(&:empty?)
+      "#{year}-#{month}-#{day}-#{name}.md"
+    end
+
     private
 
     def split_filename
