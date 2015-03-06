@@ -2,7 +2,7 @@ require 'yaml'
 require 'hashie'
 
 class Blogbrid
-  class Content
+  class Page
     def initialize(path)
       @path = path
     end

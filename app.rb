@@ -45,6 +45,7 @@ class Blogbrid < Sinatra::Base
   get '/*/' do |file|
     path = "#{settings.pages_path}/#{file}.md"
     pass if file.start_with?('_') || !File.exist?(path)
-    slim :page, locals: { content: Content.new(path) }
+    page = Page.new(path)
+    slim :page, locals: { content: page, page: page }
   end
 end
