@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'post'
 
 RSpec.describe Blogbrid::Post do
-  let(:valid_post) { 'spec/fixtures/2015-02-24-post-sample.md' }
+  let(:valid_post) { 'spec/fixtures/content/posts/2015-02-24-post-sample.md' }
 
   describe '#name' do
     let(:post) { Blogbrid::Post.new(valid_post) }

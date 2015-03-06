@@ -1,7 +1,7 @@
-require_relative 'content'
+require_relative 'page'
 
 class Blogbrid
-  class Post < Content
+  class Post < Page
     def date
       @date ||= Date.new(*split_filename[0, 3].map(&:to_i))
     end
