@@ -8,8 +8,8 @@ RSpec.describe Blogbrid::Page do
   end
 
   let(:markdown) { 'markdown.md' }
-  let(:front_matter) { 'front_matter.md' }
-  let(:empty_front_matter) { 'empty_front_matter.md' }
+  let(:front_matter) { 'front_matter/present.md' }
+  let(:empty_front_matter) { 'front_matter/empty.md' }
 
   describe '#body' do
     context 'Front Matterがないファイルのとき' do
@@ -77,7 +77,7 @@ RSpec.describe Blogbrid::Page do
       let(:page) { Blogbrid::Page.new(empty_front_matter) }
 
       it 'ファイル名から拡張子を除いた文字列を返すこと' do
-        expect(page.title).to eq('empty_front_matter')
+        expect(page.title).to eq('empty')
       end
     end
 
@@ -92,19 +92,23 @@ RSpec.describe Blogbrid::Page do
 
   describe '#url' do
     let(:page) { Blogbrid::Page.new(markdown) }
+    let(:page_in_dir) { Blogbrid::Page.new(front_matter) }
 
     it 'ファイル名からURLに変換すること' do
       expect(page.url).to eq('/markdown/')
+      expect(page_in_dir.url).to eq('/front_matter/present/')
     end
   end
 
   describe '.url_to_filename' do
-    let(:url) { '/markdown/' }
-    let(:url_without_slash) { 'markdown' }
+    let(:url) { '/front_matter/present/' }
+    let(:url_without_slash) { 'front_matter/present' }
+    let(:url_simple) { '/markdown/' }
 
     it '渡されたURLをファイル名に変換すること' do
+      expect(Blogbrid::Page.url_to_filename(url_simple)).to eq('markdown.md')
       converted_filename = Blogbrid::Page.url_to_filename(url)
-      expect(converted_filename).to eq('markdown.md')
+      expect(converted_filename).to eq('front_matter/present.md')
       expect(Blogbrid::Page.url_to_filename(url_without_slash)).to eq(converted_filename)
     end
   end
