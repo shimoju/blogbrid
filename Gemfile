@@ -13,6 +13,7 @@ gem 'puma', require: false
 gem 'hashie'
 
 gem 'slim'
+gem 'sass'
 gem 'redcarpet'
 
 source 'https://rails-assets.org' do

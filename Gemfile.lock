@@ -176,6 +176,7 @@ DEPENDENCIES
   rake
   redcarpet
   rspec
+  sass
   sinatra
   sinatra-asset-pipeline
   sinatra-contrib
