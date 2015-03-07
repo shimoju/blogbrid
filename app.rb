@@ -9,10 +9,10 @@ class Blogbrid < Sinatra::Base
     register Sinatra::ConfigFile
     config_file 'config.yml'
     set :theme_path, "themes/#{settings.theme}"
-    set :content_path, "#{settings.root}/content"
-    set :pages_path, "#{settings.content_path}/pages"
-    set :posts_path, "#{settings.content_path}/posts"
     set :views, "#{settings.root}/#{settings.theme_path}/views"
+    set :content_path, "#{settings.root}/content"
+    Page.base_path = "#{settings.content_path}/pages"
+    Post.base_path = "#{settings.content_path}/posts"
 
     set :assets_prefix, %W(assets vendor/assets #{settings.theme_path}/assets)
     set :assets_css_compressor, :sass
@@ -35,17 +35,17 @@ class Blogbrid < Sinatra::Base
     slim :index
   end
 
-  get '/:year/:month/:day/:name/' do
-    path = "#{settings.posts_path}/#{params[:year]}-#{params[:month]}-#{params[:day]}-#{params[:name]}.md"
-    pass unless File.exist?(path)
-    post = Post.new(path)
+  # Post
+  get '/*/' do |path|
+    post = Post.new(Post.url_to_filename(path))
+    pass unless post.exist?
     slim :post, locals: { content: post, post: post }
   end
 
-  get '/*/' do |file|
-    path = "#{settings.pages_path}/#{file}.md"
-    pass if file.start_with?('_') || !File.exist?(path)
-    page = Page.new(path)
+  # Page
+  get '/*/' do |path|
+    page = Page.new(Page.url_to_filename(path))
+    pass unless page.exist?
     slim :page, locals: { content: page, page: page }
   end
 end
