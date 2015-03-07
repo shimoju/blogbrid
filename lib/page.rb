@@ -5,6 +5,8 @@ class Blogbrid
   class Page
     @base_path = 'content/pages'
 
+    attr_reader :file, :path
+
     def initialize(path, base_path = self.class.base_path)
       @path = path
       @file = File.expand_path(path, base_path)
