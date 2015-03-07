@@ -13,7 +13,7 @@ class Blogbrid
     end
 
     def url
-      date.strftime("/%Y/%m/%d/#{name}/")
+      @url ||= date.strftime("/%Y/%m/%d/#{name}/")
     end
 
     def self.url_to_filename(url)
