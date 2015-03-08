@@ -3,3 +3,4 @@ title: Blogbrid
 theme: default
 
 content_dir: content
+build_dir: build
