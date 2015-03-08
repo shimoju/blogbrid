@@ -42,8 +42,8 @@ RSpec.describe Blogbrid::Page do
     context 'Front Matterがないファイルのとき' do
       let(:page) { Blogbrid::Page.new(markdown) }
 
-      it 'nilを返すこと' do
-        expect(page.data).to be_nil
+      it '空のオブジェクトを返すこと' do
+        expect(page.data).to be_empty
       end
     end
 
@@ -83,6 +83,14 @@ RSpec.describe Blogbrid::Page do
   end
 
   describe '#title' do
+    context 'Front Matterがないファイルのとき' do
+      let(:page) { Blogbrid::Page.new(markdown) }
+
+      it 'ファイル名から拡張子を除いた文字列を返すこと' do
+        expect(page.title).to eq('markdown')
+      end
+    end
+
     context 'Front Matterでタイトルが設定されていないとき' do
       let(:page) { Blogbrid::Page.new(empty_front_matter) }
 

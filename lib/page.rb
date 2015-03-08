@@ -61,7 +61,7 @@ class Blogbrid
       if file =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
         {body: $POSTMATCH, data: Hashie::Mash.new(YAML.load($1))}
       else
-        {body: file, data: nil}
+        {body: file, data: Hashie::Mash.new}
       end
     end
   end
