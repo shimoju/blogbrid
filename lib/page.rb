@@ -65,7 +65,7 @@ class Blogbrid
     def parse_front_matter
       file = File.read(@file)
       if file =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-        {body: $POSTMATCH, data: Hashie::Mash.new(YAML.load($1))}
+        {body: $~.post_match, data: Hashie::Mash.new(YAML.load($1))}
       else
         {body: file, data: Hashie::Mash.new}
       end
