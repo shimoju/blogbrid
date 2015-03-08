@@ -131,6 +131,13 @@ RSpec.describe Blogbrid::Page do
     end
   end
 
+  describe '.all' do
+    it 'すべてのコンテンツを返すこと' do
+      pages = Blogbrid::Page.all
+      expect(pages.size).to eq 3
+    end
+  end
+
   describe '.base_path' do
     after(:example) do
       Blogbrid::Page.base_path = @base_path

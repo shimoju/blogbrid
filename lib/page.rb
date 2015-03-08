@@ -42,6 +42,12 @@ class Blogbrid
       "#{path}.md"
     end
 
+    def self.all
+      Dir.chdir(base_path) do
+        Dir.glob('**/*.md').map { |path| new(path) }
+      end
+    end
+
     def self.base_path
       @base_path
     end
