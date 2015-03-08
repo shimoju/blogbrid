@@ -10,7 +10,7 @@ class Blogbrid < Sinatra::Base
     config_file 'config.yml'
     set :theme_path, "themes/#{settings.theme}"
     set :views, "#{settings.root}/#{settings.theme_path}/views"
-    set :content_path, "#{settings.root}/content"
+    set :content_path, File.expand_path(settings.content_dir, settings.root)
     Page.base_path = "#{settings.content_path}/pages"
     Post.base_path = "#{settings.content_path}/posts"
 
